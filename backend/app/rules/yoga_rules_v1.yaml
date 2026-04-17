@@ -1,0 +1,66 @@
+version: "1.0"
+book:
+  id: "book_001"
+  name: "Sample Kundali Logic"
+  edition: "2026"
+  author: "Demo"
+terminology_profile: "book_style_v1"
+yogas:
+  - id: "raj_yoga_001"
+    name: "Raja Yoga (Demo)"
+    sanskrit_name: "राजयोग"
+    chapter_ref: "Ch 1"
+    tags: ["career", "status"]
+    prerequisites:
+      ayanamsa: ["lahiri"]
+    conditions:
+      all:
+        - type: "planet_in_house"
+          planet: "Sun"
+          house_in: [1, 5, 9]
+        - type: "planet_in_house"
+          planet: "Mars"
+          house_in: [1, 10]
+      any:
+        - type: "aspect"
+          from_planet: "Jupiter"
+          to_planet: "Sun"
+          aspect_type: "vedic_full"
+      none:
+        - type: "planet_condition"
+          planet: "Sun"
+          condition: "debilitated"
+    scoring:
+      base: 0.62
+      boosters:
+        - when:
+            type: "planet_condition"
+            planet: "Sun"
+            condition: "exalted"
+          add: 0.18
+          reason: "Sun exalted improves authority outcomes."
+      dampeners:
+        - when:
+            type: "planet_condition"
+            planet: "Mars"
+            condition: "combust"
+          subtract: 0.15
+          reason: "Combust Mars weakens execution strength."
+      cap:
+        min: 0.0
+        max: 0.95
+    interpretation:
+      strong:
+        min_score: 0.75
+        text: "Strong Raja Yoga indications for status and leadership."
+      moderate:
+        min_score: 0.5
+        text: "Moderate Raja Yoga; outcomes improve with effort."
+      weak:
+        min_score: 0.3
+        text: "Yoga exists but weak; timing matters."
+      absent:
+        text: "Clear Raja Yoga signature not formed by this rule."
+    qa_snippets:
+      career: "Supports growth in role/responsibility."
+      finance: "Can improve earnings through authority-linked roles."
